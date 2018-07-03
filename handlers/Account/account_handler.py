@@ -98,3 +98,8 @@ class FoundpasswordHandler(BaseHandler):
         self.db.commit()
         self.conn.delete("found_password:%s" % e_mail)
         return self.write({'status': 200, 'msg': '修改密码成功'})
+
+class IndexHandler(BaseHandler):
+    """首页"""
+    def get(self):
+        return self.render('article/article_index.html')

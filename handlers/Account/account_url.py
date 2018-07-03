@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from account_handler import (LoginHandler, RegistHandler, ForgetHandler,
                              EmailConfirmHandler, FoundpasswordHandler,
-                             SendEmailHandler)
+                             SendEmailHandler, IndexHandler)
 
 account_handlers = [
     (r'/user_login', LoginHandler),
@@ -10,4 +10,5 @@ account_handlers = [
     (r'/send_forget_email',  SendEmailHandler),
     (r'/email_confirm',  EmailConfirmHandler),
     (r'/found_password',  FoundpasswordHandler),
+    (r'/',  IndexHandler),
 ]
