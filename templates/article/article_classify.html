@@ -1,0 +1,112 @@
+{% extends 'article_index.html' %}
+
+{% block title %}分类页面{% end %}
+
+{% block body_wrapper %}
+
+
+<!--header-web--><div id="container-page">
+<div class="jiajia">
+  <article class="box">
+
+{% for article in pagination.items %}
+   <section class="list">
+       <span class="titleimg"> <a href="/my_article/article_details?unique_id={{ article.uuid }}" target="_blank">
+  <img width="1000" height="556" src="../../static/avatar_images/article_pic/{{ article.avatar }}" class="attachment-thumbnail size-thumbnail wp-post-image" alt="" />  </a> </span>
+
+  <a href="/my_article/article_details?unique_id={{ article.uuid }}" target="_blank" class="iu" >新</a>
+
+ <div class="vh">
+  <div class=" mecc">
+
+    <h2 class="mecctitle"><a href="/my_article/article_details?unique_id={{ article.uuid }}" target="_blank">
+      {{ article.title }}      </a> </h2>
+    <time>
+    {{ article.create_time }}
+
+    </time>
+  </div>
+  </div>
+
+  <div class=" zaiyao">
+    <p>{{ article.abstract }}</p>
+  </div>
+</section>
+{% end %}
+
+
+                  <!--list-->
+ </article>
+     <div class="posts-nav">
+{% for page in pagination.iter_pages() %}
+         {% if page is not None %}
+            <a class='page-numbers {% if page == pagination.page %}current{% end %}' href='{{ page }}?classify_unique_id={{ uuid }}'>{{ page }}</a>
+         {% else %}
+            <a class='page-numbers' href='javascript:void(0);'>...</a>
+         {% end %}
+{% end %}
+     </div>
+
+  <div id="post-read-more">
+    <a href="javascript:void(0);" >看更多</a>
+</div>
+</div>
+<style>#post-read-more{display:block;}</style>
+ <script type="text/javascript">
+    <!--
+            //平台、设备和操作系统
+            var system = {
+                win: false,
+                mac: false,
+                xll: false,
+                ipad:false
+            };
+            //检测平台
+            var p = navigator.platform;
+            system.win = p.indexOf("Win") == 0;
+            system.mac = p.indexOf("Mac") == 0;
+            system.x11 = (p == "X11") || (p.indexOf("Linux") == 0);
+            system.ipad = (navigator.userAgent.match(/iPad/i) != null)?true:false;
+            //跳转语句
+            if (system.win || system.mac || system.xll||system.ipad) {
+
+       document.getElementById("post-read-more").style.display="none";
+            } else {
+
+
+            }
+    -->
+    </script>
+  <aside id="sitebar">
+<div class="sitebar_list">
+      		 <h4 class="sitebar_title">热门文章</h4>
+			 <ul>
+  {% for hot_article in hot_articles %}
+    <li>
+        <a href="/my_article/article_details?unique_id={{ hot_article.uuid }}" target="_blank">{{ hot_article.title }}</a>
+    </li>
+  {% end %}
+
+</ul>
+</div>    <div class="sitebar_list">
+      <a href="gardenl.html" target="_blank"><img width="699" height="341" src="wp-content/uploads/2018/04/S.jpg" class="image wp-image-1158  attachment-full size-full" alt="" style="max-width: 100%; height: auto;" /></a></div> <div class="sitebar_list">
+       <h4 class="sitebar_title">文章分类</h4><div class="tagcloud">
+      {% for classify in classifies %}
+      <a href="/my_article/article_classify/1?classify_unique_id={{ classify.uuid }}" class="tag-cloud-link tag-link-8 tag-link-position-1" style="font-size: 15px;">{{ classify.name }}</a>
+      {% end %}
+</div>
+{#      <a href="service.html" target="_blank" ><img class="totop" src="{{ static_url('article/article_index/images/logo.png') }}" /></a>#}
+   <script type="text/javascript">
+$(function() {
+    var elm = $('.totop');
+    var startPos = $(elm).offset().top;
+    $.event.add(window, "scroll", function() {
+        var p = $(window).scrollTop();
+        $(elm).css('position',((p) > startPos) ? 'fixed' : 'static');
+        $(elm).css('top',((p) > startPos) ? '0px' : '');
+    });
+});
+</script>
+</aside></div>
+
+{% end %}

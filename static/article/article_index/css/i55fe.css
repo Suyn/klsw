@@ -1,0 +1,100 @@
+@media only screen and (min-width: 900px) {
+#container-page{
+width:100%;
+	overflow: hidden;}	
+
+.jiajia{width: 1205px;margin:0 auto;padding:0px 0px 40px 0px;}	
+.box{
+	width: 1208px;
+	margin-left:-3px;clear:both;overflow:hidden;margin-top:20px;
+}
+/*文章列表*/
+.list {
+	width: 399px;
+	overflow: hidden;
+	float:left;margin-left:3px;margin-top:20px;transition: all 0.3s;
+}
+.list:hover img {
+    transform: scale(1.2,1.2);
+}
+.titleimg {
+	display: block;
+	float: left;
+	width: 399px;
+	height: auto;
+	overflow: hidden;
+	background-size: 384px auto;
+	border-radius:3px;border-bottom:1px solid #fff;
+}
+.titleimg img {
+ displau:block;
+  width: 398px;height:auto;vertical-align: middle;    
+    transition: transform 0.3s;
+
+}
+.iu{display:none;}
+.mecc {
+	width: 85%;margin:0 auto;padding:20px 0px;overflow:hidden;
+}
+.mecctitle {
+	height:30px;line-height:32px;overflow:hidden
+}
+.mecctitle a {
+	font-weight:100;display:block;
+}
+time{
+	color: #a2a2a2;
+	margin-top: 20px;
+	font-style: normal;
+	font-size:16px;
+	display: inline-block;height:19px;
+}
+.list p{display:none;}
+#sitebar {display:none;}		
+}
+@media only screen and (max-width: 900px) {
+#container-page{width: 100%;
+	overflow: hidden;background:#fff;}	
+.box {
+	width: 100%;
+	overflow:hidden;
+}
+.list {
+	width: 100%;
+	height: auto;
+    background: #f8f8f8;
+	overflow:hidden;margin-bottom:20px;
+}
+
+.list:first-child{border-top:0px;}
+.titleimg {
+	width: 100%;
+	display: block;
+border-radius:2px;
+}
+.titleimg img {
+	width: 100%;
+}
+.iu{display:none;}
+.mecc {
+	width: 90%;	overflow: hidden;margin:0 auto;padding:15px 0px;
+}
+.mecctitle {
+	line-height: 25px;
+}
+.mecctitle a {
+	 color:#000;
+	font-weight: normal;font-size:18px;
+}
+.mecctitle a:hover {
+	color: #d6623d;
+}
+time {
+	color: #a2a2a2;
+	margin-top: 10px;
+	font-style: normal;
+	display: inline-block;font-size:15px;
+}
+.list p{display:none;}
+
+}

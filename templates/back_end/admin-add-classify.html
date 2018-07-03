@@ -1,0 +1,67 @@
+{% extends 'admin-index.html' %}
+
+{% block title %}添加分类{% end %}
+
+{% block body_wrapper %}
+<!-- content start -->
+<div class="admin-content">
+
+  <div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">添加分类</strong> / <small>Add Classify</small></div>
+  </div>
+
+  <div class="am-tabs am-margin" data-am-tabs>
+    <ul class="am-tabs-nav am-nav am-nav-tabs">
+{#      <li class="am-active"><a href="#tab1">基本信息</a></li>#}
+      <li><a href="#tab2">添加分类</a></li>
+{#      <li><a href="#tab3">SEO 选项</a></li>#}
+    </ul>
+
+    <div class="am-tabs-bd">
+      <div class="am-tab-panel am-fade" id="tab3">
+        <form class="am-form" action="/my_admin/add_classify" method="post">
+            {% module xsrf_form_html() %}
+          <div class="am-g am-margin-top-sm">
+            <div class="am-u-sm-2 am-text-right">
+              分类名字
+            </div>
+            <div class="am-u-sm-4 am-u-end">
+              <input type="text" placeholder="请输入分类名" class="am-input-sm" name="classify_name" />
+            </div>
+          </div>
+            <div class="am-margin">
+                <button type="submit" id="submit-article-btn" class="am-btn am-btn-primary am-btn-xs">提交分类</button>
+            </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+
+</div>
+<!-- content end -->
+{% end %}
+
+{% block end_js %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('sweetalert/sweetalert.css') }}">
+<script src="{{ static_url('sweetalert/sweetalert.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ static_url('simditor/css/simditor.css') }}" />
+{#<script>#}
+{#        $(function(){#}
+{#        Simditor.locale = 'zh-CN';//设置中文#}
+{#        var editor = new Simditor({#}
+{#            textarea: $('#editor'),  //textarea的id#}
+{#            toolbar:  ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'], //工具条都包含哪些内容#}
+{#            pasteImage: true,//允许粘贴图片#}
+{#        });#}
+{#  //optional options#}
+{#});#}
+{#</script>#}
+<script type="text/javascript" src="{{ static_url('simditor/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/module.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/hotkeys.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/uploader.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/simditor.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('article/add_article/add_article.js') }}"></script>
+{% end %}

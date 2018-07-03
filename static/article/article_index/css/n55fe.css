@@ -1,0 +1,124 @@
+@media only screen and (min-width: 900px) {
+/*页面主体*/
+#container-page{
+width:1205px;
+margin:1px auto;
+	overflow: hidden;}	
+
+.jiajia{float:left;width: 800px;padding:0px 40px 40px 0px;background:#fff;}	
+.box{
+	width: 800px;
+	overflow:hidden;
+}
+/*文章列表*/
+.list {
+	width: 100%;
+	padding-bottom: 35px;
+	margin-top: 40px;
+	overflow: hidden;
+	border-bottom: 2px dashed #f1f1f1;
+}
+.list:last-child{border-bottom:none;margin-bottom:-25px;}
+.titleimg {
+	display: block;
+	float: left;
+	width: 250px;
+	height: auto;
+	overflow: hidden;
+	background-size: 250px auto;
+	border-radius:3px;
+}
+.titleimg img {
+ displau:block;
+  width: 250px;height:auto;
+
+}
+.iu{display:none;}
+.mecc {
+	width: 510px;
+	float: right;
+}
+.mucc {
+	width: 99%;
+	margin: 0 auto;
+}
+.mecctitle {
+	line-height: 21px;
+}
+.mecctitle a {
+	font-size: 20px;
+}
+time{
+	color: #a2a2a2;
+	margin-top: 20px;
+	font-style: normal;
+	font-size:16px;
+	display: inline-block;
+}
+time a{color: #a2a2a2;font-size:16px;
+}
+.zaiyao {
+	float: right;
+	width: 505px;
+	line-height: 35px;
+	margin-top: 10px;
+	font-size:16px;
+	margin-right:5px;
+}
+.zuiyao {
+	width: 99%;
+	line-height: 33px;
+	margin: 0 auto;
+	margin-top: 10px;
+	clear: both;
+	font-size:16px;
+}
+
+}
+
+@media only screen and (max-width: 900px) {
+.list {
+	width: 100%;
+	margin:0 auto;
+	height: auto;
+	border-top: 1px solid #f1f1f1;
+	padding-top:28px;
+	padding-bottom:25px;overflow:hidden;
+}
+
+.list:first-child{border-top:0px;}
+.titleimg {
+	width: 30%;
+	display: block;
+	float: left;
+	margin-right: 5%;border-radius:2px;margin-left:5%;
+}
+.titleimg img {
+	width: 100%;
+}
+.iu{display:none;}
+.mecc {
+	width: 55%;
+	float: right;margin-right:5%;
+}
+.mucc{width:90%;margin:0 auto;}
+.mecctitle {
+	overflow: hidden;
+	line-height: 25px;
+	margin-top: -5px;
+}
+.mecctitle a {
+	font-weight: normal;
+}
+.mecctitle a:hover {
+	color: #d6623d;
+}
+time {
+	color: #a2a2a2;
+	margin-top: 10px;
+	font-style: normal;
+	display: inline-block;font-size:15px;
+}
+time a{color: #a2a2a2;font-size:15px;}
+.list p{display:none;}
+}

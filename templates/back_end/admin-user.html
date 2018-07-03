@@ -1,0 +1,153 @@
+{% extends 'admin-index.html' %}
+
+{% block body_wrapper %}
+  <!-- content start -->
+  <div class="admin-content">
+    <div class="am-cf am-padding">
+      <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">个人资料</strong> / <small>Personal information</small></div>
+    </div>
+
+    <hr/>
+
+    <div class="am-g">
+
+      <div class="am-u-sm-12 am-u-md-4 am-u-md-push-8">
+        <div class="am-panel am-panel-default">
+          <div class="am-panel-bd">
+            <div class="am-g">
+              <div class="am-u-md-4">
+                <img class="am-img-circle am-img-thumbnail" src="/static/avatar_images/useravatars/{{ useravatar }}" alt=""/>
+              </div>
+              <div class="am-u-md-8">
+                <p>请使用本地上传头像</p>
+                <form class="am-form" action="/my_admin/modify_avatar" method="post" enctype="multipart/form-data">
+                    {% module xsrf_form_html() %}
+                  <div class="am-form-group">
+                    <input type="file" id="user_pic" name="user_pic">
+                    <p class="am-form-help">请选择要上传的文件...</p>
+                    <button type="submit" class="am-btn am-btn-primary am-btn-xs">保存</button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
+{#        <div class="am-panel am-panel-default">#}
+{#          <div class="am-panel-bd">#}
+{#            <div class="user-info">#}
+{#              <p>等级信息</p>#}
+{#              <div class="am-progress am-progress-sm">#}
+{#                <div class="am-progress-bar" style="width: {{ Grade[2] }}%"></div>#}
+{#              </div>#}
+{#              <p class="user-info-order">当前等级：<strong>LV{{ Grade[0] }}</strong> &nbsp;&nbsp;&nbsp;距离下一级别：<strong>{{ Grade[1] }}</strong>点克隆值</p>#}
+{#            </div>#}
+
+
+{#            <div class="user-info">#}
+{#              <p>信用信息</p>#}
+{#              <div class="am-progress am-progress-sm">#}
+{#                <div class="am-progress-bar am-progress-bar-success" style="width: 80%"></div>#}
+{#              </div>#}
+{#              <p class="user-info-order">信用等级：正常当前 信用积分：<strong>80</strong></p>#}
+{#            </div>#}
+{#          </div>#}
+{#        </div>#}
+
+      </div>
+
+      <div class="am-u-sm-12 am-u-md-8 am-u-md-pull-4">
+        <div class="am-form am-form-horizontal" >
+          <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">姓名 / Name</label>
+            <div class="am-u-sm-9">
+              <input type="text" id="user-name" placeholder="" value="{{ username }}">
+              <small>用户名不可更改</small>
+            </div>
+          </div>
+        </div>
+
+          <form class="am-form am-form-horizontal" action="" method="post">
+              {% module xsrf_form_html() %}
+           <div class="am-form-group">
+            <label for="user-email" class="am-u-sm-3 am-form-label">电子邮件 / Email</label>
+            <div class="am-u-sm-9">
+              <input type="email" id="user-email" placeholder="{{ useremail }}" value="{{ useremail }}" name="e-mail">
+              <small><span style="cursor: pointer;color: green" id="modify_email">修改邮箱</span> &nbsp;&nbsp;&nbsp;&nbsp;<span hidden style="cursor: pointer;color: green" id="submit_email">提交修改</span></small>
+            </div>
+          </div>
+              </form>
+
+            <form class="am-form am-form-horizontal" action="" method="post">
+                {% module xsrf_form_html() %}
+            <div class="am-form-group">
+            <label for="user-name" class="am-u-sm-3 am-form-label">密码 / Password</label>
+            <div class="am-u-sm-9">
+              <input type="password" id="user-password" placeholder="旧密码 / Old Password" name="password">
+              <small><span style="cursor: pointer;color: green" id="modify_pd">修改密码</span></small>
+            </div>
+          </div>
+
+             <div hidden class="am-form-group" id="pd_hidden" >
+            <label for="user-name" class="am-u-sm-3 am-form-label">新密码 / New Password</label>
+            <div class="am-u-sm-9">
+              <input type="password" id="user-password2" placeholder="新密码 / New Password" name="password2">
+              <small><span style="cursor: pointer;color: green" id="submit_pd">提交修改</span></small>
+            </div>
+          </div>
+            </form>
+
+{#          <div class="am-form-group">#}
+{#            <div class="am-u-sm-9 am-u-sm-push-3">#}
+{#              <button type="submit" class="am-btn am-btn-primary">保存修改</button>#}
+{#            </div>#}
+{#          </div>#}
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- content end -->
+{% end %}
+
+{% block end_js %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('sweetalert/sweetalert.css') }}">
+<script src="{{ static_url('sweetalert/sweetalert.min.js') }}"></script>
+<script src="{{ static_url('back_end/js/modify_pd.js') }}"></script>
+
+<script>
+    $(function(){
+    $('#user-name').attr('disabled',true);
+    $('#user-email').attr('disabled',true);
+    $('#user-password').attr('disabled',true);
+    modify_emails = $('#user-email')
+    modify_pd = $('#user-password')
+    $('#modify_email').click(function () {
+        if (modify_emails.attr('disabled') == 'disabled'){
+            $('#user-email').attr('disabled',false);
+            $('#modify_email').html('取消修改');
+            $('#submit_email').attr('hidden', false);
+        }
+        else{
+            $('#user-email').val(modify_emails.attr('placeholder'));
+            $('#user-email').attr('disabled',true);
+            $('#modify_email').html('修改邮箱');
+            $('#submit_email').attr('hidden', true);
+        }
+    });
+    $('#modify_pd').click(function () {
+        if (modify_pd.attr('disabled') == 'disabled'){
+            $('#user-password').attr('disabled',false);
+            $('#pd_hidden').attr('hidden', false);
+            $('#modify_pd').html('取消修改');
+        }
+        else{
+            $('#user-password').attr('disabled',true);
+            $('#user-password').val('');
+            $('#user-password2').val('');
+            $('#pd_hidden').attr('hidden', true);
+            $('#modify_pd').html('修改密码')
+        }
+    });
+});
+</script>
+{% end %}

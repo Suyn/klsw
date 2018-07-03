@@ -1,0 +1,122 @@
+{% extends 'admin-index.html' %}
+
+{% block title %}编辑文章{% end %}
+
+{% block body_wrapper %}
+<!-- content start -->
+<div class="admin-content">
+
+  <div class="am-cf am-padding">
+    <div class="am-fl am-cf"><strong class="am-text-primary am-text-lg">编辑</strong> / <small>Edit</small></div>
+  </div>
+
+  <div class="am-tabs am-margin" data-am-tabs>
+    <ul class="am-tabs-nav am-nav am-nav-tabs">
+{#      <li class="am-active"><a href="#tab1">基本信息</a></li>#}
+      <li><a href="#tab2">编辑文章</a></li>
+{#      <li><a href="#tab3">SEO 选项</a></li>#}
+    </ul>
+
+    <div class="am-tabs-bd">
+
+      <div class="am-tab-panel am-fade" id="tab2">
+        <form class="am-form" id="upload_article" enctype="multipart/form-data">
+            {% module xsrf_form_html() %}
+          <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">
+              文章标题
+            </div>
+            <div class="am-u-sm-4">
+              <input type="text" class="am-input-sm" id="article_title" value="{{ article.title }}">
+            </div>
+            <div class="am-u-sm-6">*必填，不可重复</div>
+          </div>
+
+
+            <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">
+              内容摘要
+            </div>
+            <div class="am-u-sm-4">
+              <input type="text" class="am-input-sm" id="article_abstract" value="{{ article.abstract }}">
+            </div>
+            <div class="am-u-sm-6">*文章描述</div>
+          </div>
+
+            <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">
+              文章封面
+            </div>
+                <div class="am-u-md-4">
+                <img class="am-img-circle am-img-thumbnail" src="/static/avatar_images/article_pic/{{ article.avatar }}" alt=""/>
+              </div>
+            <div class="am-u-sm-4">
+              <div class="am-form-group">
+                    <input type="file" id="article_pic" name="user_pic" />
+                    <p class="am-form-help">请选择图片...</p>
+                  </div>
+            </div>
+            <div class="am-u-sm-6">*文章封面图</div>
+          </div>
+
+            <div class="am-g am-margin-top">
+            <div class="am-u-sm-2 am-text-right">
+              文章分类
+            </div>
+            <div class="am-u-sm-4">
+              <select name="" id="classify" class="am-input-sm">
+                  {% for class_fy in classify %}
+					<option value="{{ class_fy.uuid }}" {% if class_fy.id == article.classify.id %}selected="selected"{% end %}>{{ class_fy.name }}</option>
+                  {% end %}
+               </select>
+            </div>
+            <div class="am-u-sm-6">*选择文章偏向的分类</div>
+          </div>
+
+
+          <div class="am-g am-margin-top-sm">
+            <div class="am-u-sm-2 am-text-right">
+              内容描述
+            </div>
+            <div class="am-u-sm-10">
+              <textarea rows="10" id="editor" placeholder="开始编辑内容......" name="content" >{{ article.content }}</textarea>
+            </div>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="am-margin">
+    <input type="hidden" id="article_unique_id" value="{{ article.uuid }}">
+    <button type="button" id="submit-article-btn" class="am-btn am-btn-primary am-btn-xs">提交修改</button>
+{#    <button type="button" class="am-btn am-btn-primary am-btn-xs">放弃保存</button>#}
+  </div>
+</div>
+<!-- content end -->
+{% end %}
+
+{% block end_js %}
+<link rel="stylesheet" type="text/css" href="{{ static_url('sweetalert/sweetalert.css') }}">
+<script src="{{ static_url('sweetalert/sweetalert.min.js') }}"></script>
+<link rel="stylesheet" type="text/css" href="{{ static_url('simditor/css/simditor.css') }}" />
+{#<script>#}
+{#        $(function(){#}
+{#        Simditor.locale = 'zh-CN';//设置中文#}
+{#        var editor = new Simditor({#}
+{#            textarea: $('#editor'),  //textarea的id#}
+{#            toolbar:  ['title', 'bold', 'italic', 'underline', 'strikethrough', 'fontScale', 'color', '|', 'ol', 'ul', 'blockquote', 'code', 'table', '|', 'link', 'image', 'hr', '|', 'indent', 'outdent', 'alignment'], //工具条都包含哪些内容#}
+{#            pasteImage: true,//允许粘贴图片#}
+{#        });#}
+{#  //optional options#}
+{#});#}
+{#</script>#}
+<script type="text/javascript" src="{{ static_url('simditor/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/module.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/hotkeys.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/uploader.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('simditor/js/simditor.js') }}"></script>
+<script type="text/javascript" src="{{ static_url('article/add_article/edit_article.js') }}"></script>
+{% end %}
