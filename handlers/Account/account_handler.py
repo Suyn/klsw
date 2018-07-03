@@ -102,4 +102,4 @@ class FoundpasswordHandler(BaseHandler):
 class IndexHandler(BaseHandler):
     """首页"""
     def get(self):
-        return self.render('article/article_index.html')
+        return self.redirect('/my_article/article_index/1')
