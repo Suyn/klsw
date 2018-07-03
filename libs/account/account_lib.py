@@ -118,10 +118,10 @@ def modify_email_lib(self, email):
     self.conn.setex("found_password:%s" % email, code_time, 1800)
     content = u"""
                     您好，<a href='http://clonesw.com'>克隆生物</a>网站提醒您，您正在进行找回密码操作,
-                    修改密码请<a href="http://clonesw.com/send_forget_email?e_mail={}&code={}&uid={}">点击此链接</a>，
+                    修改密码请<a href="http://clonesw.com/my_admin/modify_email?e_mail={}&code={}&uid={}">点击此链接</a>，
                     链接有效时间为30分钟，若非您本人所为请忽略此邮件。
                     """.format(email, code_time, user_uuid)
-    send_qq_html_email("wedding@wulilove.cn", e_mail_list, "找回密码", content)
+    send_qq_html_email("account-email@clonesw.com", e_mail_list, "找回密码", content)
     return {'status': 200, 'msg': '绑定成功'}
 
 def email_confirm_lib(self, email, code_time, uuid):
@@ -173,6 +173,6 @@ def forget_lib(self, code, email):
                 修改密码请<a href="http://clonesw.com/send_forget_email?e_mail={}&code={}">点击此链接</a>，
                 链接有效时间为30分钟，若非您本人所为请忽略此邮件。
                 """.format(user.email, code)
-        send_qq_html_email("wedding@wulilove.cn", e_mail_list, "找回密码", content)
+        send_qq_html_email("account-email@clonesw.com", e_mail_list, "找回密码", content)
         return {'status': True, 'msg': '发送成功，请到您的邮箱继续操作'}
     return {'status': False, 'msg': '该邮箱号码不存在'}
