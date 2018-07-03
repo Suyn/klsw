@@ -122,7 +122,7 @@ def modify_email_lib(self, email):
                     链接有效时间为30分钟，若非您本人所为请忽略此邮件。
                     """.format(email, code_time, user_uuid)
     send_qq_html_email("account-email@clonesw.com", e_mail_list, "找回密码", content)
-    return {'status': 200, 'msg': '绑定成功'}
+    return {'status': 200, 'msg': '发送成功，请留意您的新邮箱'}
 
 def email_confirm_lib(self, email, code_time, uuid):
     if email is None or email == '':
@@ -135,11 +135,10 @@ def email_confirm_lib(self, email, code_time, uuid):
     data = self.conn.get("found_password:%s" % email)
     if data is None:
         return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
-    if data == code_time:
-        user.email = email
-        self.db.commit()
-        return {'status': True, 'msg': '绑定成功'}
-    return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
+    user.email = email
+    self.db.commit()
+    return {'status': True, 'msg': '绑定成功'}
+
 
 
 
