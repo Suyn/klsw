@@ -104,14 +104,44 @@ def modify_password_lib(self, password, password2):
     return {'status': 400, 'msg': '旧密码错误'}
 
 def modify_email_lib(self, email):
-    """修改邮箱"""
+    """修改邮箱----发送邮件"""
     if email == '' or email is None:
         return {'status': 400, 'msg': '邮箱为空'}
     if User.by_email(email) is not None:
         return {'status': 400, 'msg': '该邮箱已被绑定'}
-    self.current_user.email = email
-    self.db.commit()
+    e_mail_list = []
+    e_mail_list.append(email)
+    user_uuid = self.current_user.uuid
+    code_time = time.time()
+    if self.conn.get("found_password:%s" % email):
+        self.conn.delete("found_password:%s" % email)
+    self.conn.setex("found_password:%s" % email, code_time, 1800)
+    content = u"""
+                    您好，<a href='http://clonesw.com'>克隆生物</a>网站提醒您，您正在进行找回密码操作,
+                    修改密码请<a href="http://clonesw.com/send_forget_email?e_mail={}&code={}&uid={}">点击此链接</a>，
+                    链接有效时间为30分钟，若非您本人所为请忽略此邮件。
+                    """.format(email, code_time, user_uuid)
+    send_qq_html_email("wedding@wulilove.cn", e_mail_list, "找回密码", content)
     return {'status': 200, 'msg': '绑定成功'}
+
+def email_confirm_lib(self, email, code_time, uuid):
+    if email is None or email == '':
+        return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
+    if code_time is None or code_time == '':
+        return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
+    user = User.by_uuid(uuid)
+    if uuid is None or uuid == '' or user is None:
+        return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
+    data = self.conn.get("found_password:%s" % email)
+    if data is None:
+        return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
+    if data == code_time:
+        user.email = email
+        self.db.commit()
+        return {'status': True, 'msg': '绑定成功'}
+    return {'status': False, 'msg': '请返回个人中心重新修改邮箱'}
+
+
 
 def modify_avatar_lib(self, avatar):
     """修改头像"""
@@ -128,6 +158,7 @@ def modify_avatar_lib(self, avatar):
         return {'status': 400, 'msg': e}
 
 def forget_lib(self, code, email):
+    """忘记密码"""
     if email is None or email == '':
         return {'status': False, 'msg': '邮箱为空'}
     user = User.by_email(email)

@@ -4,6 +4,7 @@ import tornado.web
 from handlers.BaseHandler.base import BaseHandler
 from libs.grades.grades_lib import Grade
 from libs.account.account_lib import (personal_login_lib, modify_password_lib,
+                                      email_confirm_lib,
                                       modify_email_lib, modify_avatar_lib,
                                       )
 
@@ -42,6 +43,17 @@ class ModifyPassword(BaseHandler):
         return self.write({'status': 400, 'msg': result['msg']})
 
 class ModifyEmail(BaseHandler):
+    """修改邮箱"""
+    def get(self):
+        email = self.get_argument('e_mail')
+        code_time = self.get_argument('code')
+        uuid = self.get_argument('uid')
+        result = email_confirm_lib(self, email, code_time, uuid)
+        if result['status'] is True:
+            return self.write({'status': 200, 'msg': result['msg']})
+        return self.write({'status': 400, 'msg': result['msg']})
+
+
     """修改邮箱"""
     def post(self):
         email = self.get_argument('e-mail', None)

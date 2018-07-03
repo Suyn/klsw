@@ -32,7 +32,6 @@ class RegistHandler(BaseHandler):
         password = self.get_argument('password1')
         password1 = self.get_argument('password2')
         email = self.get_argument('email')
-        print name,password,password1,email
         result = personal_login_lib(self, name, password, password1, email)
         if result['status'] == 200:
             return self.write({'status': 200, 'msg': result['msg']})
