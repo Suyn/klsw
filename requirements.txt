@@ -4,7 +4,7 @@ meld3==1.0.2
 pbkdf2==1.3
 pycket==0.3.0
 PyMySQL==0.9.3
-redis==3.2.1
+redis==4.5.3
 shadowsocks==2.8.2
 singledispatch==3.4.0.3
 six==1.12.0
